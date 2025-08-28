@@ -1,1 +1,272 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBC Šelmy Liberec</title>
+    <style>
+        /* --- BARVY A TYPOGRAFIE --- */
+        :root {
+            --primary-color: #00221D;
+            --secondary-color: black;
+            --text-color: white;
+            --accent-color: #00A186;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            background-color: var(--primary-color);
+            padding: 15px 0;
+        }
+
+        nav a {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        section {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        /* --- FOTOGALERIE --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- KALENDÁŘ --- */
+        .calendar {
+            text-align: center;
+        }
+
+        .calendar h3 {
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .calendar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .calendar li {
+            background-color: var(--secondary-color);
+            margin: 10px auto;
+            padding: 15px;
+            max-width: 400px;
+            border-radius: 8px;
+        }
+
+        /* --- NOVINKY / BLOG --- */
+        .blog {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .blog article {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .blog article:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog h3 {
+            margin-top: 0;
+        }
+
+        /* --- TÝMY & ZÁPASY --- */
+        .teams, .partners {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .teams div, .partners div {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* --- KONTAKT --- */
+        .contact form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .contact input, .contact textarea {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .contact button {
+            background-color: var(--accent-color);
+            border: none;
+            padding: 15px;
+            color: var(--text-color);
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>HBC Šelmy Liberec</h1>
+    </header>
+    <nav>
+        <a href="#gallery">Fotogalerie</a>
+        <a href="#calendar">Kalendář</a>
+        <a href="#news">Novinky</a>
+        <a href="#teams">Týmy & Zápasy</a>
+        <a href="#partners">Partneři</a>
+        <a href="#contact">Kontakt</a>
+    </nav>
+
+    <!-- FOTOGALERIE -->
+    <section id="gallery">
+        <h2>Fotogalerie</h2>
+        <div class="gallery">
+            <img src="foto1.jpg" alt="Foto 1">
+            <img src="foto2.jpg" alt="Foto 2">
+            <img src="foto3.jpg" alt="Foto 3">
+            <img src="foto4.jpg" alt="Foto 4">
+        </div>
+    </section>
+
+    <!-- KALENDÁŘ -->
+    <section id="calendar">
+        <h2>Kalendář akcí</h2>
+        <div class="calendar">
+            <h3>Říjen 2025</h3>
+            <ul>
+                <li>Každou středu: Trénink</li>
+                <li>Každý pátek: Trénink</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- NOVINKY / BLOG -->
+    <section id="news">
+        <h2>Novinky</h2>
+        <div class="blog">
+            <article>
+                <h3>Nový sponzor klubu</h3>
+                <p>Přivítali jsme nového partnera, který podpoří naše tréninky a vybavení.</p>
+            </article>
+            <article>
+                <h3>Výsledky posledního zápasu</h3>
+                <p>Naše týmy se předvedly skvělým výkonem proti soupeři z Prahy.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- TÝMY & ZÁPASY -->
+    <section id="teams">
+        <h2>Týmy & Zápasy</h2>
+        <div class="teams">
+            <div>
+                <h3>Tým A</h3>
+                <p>Zápasy: 10</p>
+            </div>
+            <div>
+                <h3>Tým B</h3>
+                <p>Zápasy: 8</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARTNEŘI -->
+    <section id="partners">
+        <h2>Partneři</h2>
+        <div class="partners">
+            <div>Partner 1</div>
+            <div>Partner 2</div>
+            <div>Partner 3</div>
+        </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="contact">
+        <h2>Kontakt</h2>
+        <div class="contact">
+            <form>
+                <input type="text" placeholder="Vaše jméno" required>
+                <input type="email" placeholder="Váš email" required>
+                <textarea rows="5" placeholder="Vaše zpráva" required></textarea>
+                <button type="submit">Odeslat</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 HBC Šelmy Liberec. Všechna práva vyhrazena.
+    </footer>
+</body>
+</html>
 
