@@ -8,13 +8,20 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%2300221D'/%3E%3Cpath d='M24 64c12 2 20-4 26-10 7-7 15-12 26-10-3 11-12 21-22 27-10 6-21 8-30 3z' fill='%23fff'/%3E%3C/svg%3E" />
   <style>
     :root{
-      --green:#00221D; --black:#0a0a0a; --white:#ffffff; --muted: #d5e5e1;
-      --glass: rgba(255,255,255,0.06); --shadow: 0 10px 30px rgba(0,0,0,.25); --radius: 18px;
+      --green:#00221D;
+      --black:#0a0a0a;
+      --white:#ffffff;
+      --muted: #d5e5e1;
+      --glass: rgba(255,255,255,0.06);
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --radius: 18px;
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--black),#001613);color:var(--white);font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";scroll-behavior:smooth}
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
+
+    /* Header / Nav */
     .topbar{position:sticky;top:0;z-index:1000;background:rgba(0, 22, 19, 0.8);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
     .container{max-width:1200px;margin-inline:auto;padding:0 20px}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
@@ -25,56 +32,49 @@
     .nav a{padding:10px 14px;border-radius:12px;transition:.2s background}
     .nav a:hover{background:var(--glass)}
     .cta{background:var(--white); color:var(--black); padding:10px 14px; border-radius:12px; font-weight:700}
+
+    /* Mobile nav */
     .burger{display:none; width:40px; height:40px; border-radius:12px; border:1px solid rgba(255,255,255,.1); background:transparent; color:var(--white)}
-    @media (max-width: 860px){.nav ul{display:none}.burger{display:block}}
+    @media (max-width: 860px){
+      .nav ul{display:none}
+      .burger{display:block}
+    }
     .drawer{position:fixed; inset:0 0 auto auto; width:min(86vw, 360px); height:100vh; background:#031c18; transform:translateX(100%); transition:.25s transform; box-shadow: var(--shadow); padding:20px; display:flex; flex-direction:column; gap:8px}
     .drawer.open{transform:translateX(0)}
     .drawer a{padding:14px;border-radius:12px}
     .drawer a:hover{background:var(--glass)}
-    .hero{position:relative; isolation:isolate; overflow:hidden}
-    .hero .bg{position:absolute; inset:-10% -10% 0 -10%; background:radial-gradient(60% 60% at 70% 20%, #064a3f, transparent 60%), radial-gradient(50% 50% at 30% 10%, #00342d, transparent 60%), linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.6)); z-index:-1;}
-    .hero .container{display:grid; grid-template-columns: 1.2fr 1fr; gap:28px; align-items:center; padding:48px 20px 64px}
+
+    /* Hero */
+    .hero{position:relative; isolation:isolate; overflow:hidden; padding:40px 0}
+    .hero .bg{position:absolute; inset:0; background:radial-gradient(60% 60% at 70% 20%, #064a3f, transparent 60%), radial-gradient(50% 50% at 30% 10%, #00342d, transparent 60%), linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.6)); z-index:-1;}
+    .hero .container{display:grid; grid-template-columns: 1.2fr 1fr; gap:28px; align-items:center}
     .badge{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid rgba(255,255,255,.12); border-radius:999px; background:var(--glass); font-size:14px}
     .headline{font-size: clamp(32px, 5vw, 56px); line-height:1.02; margin:14px 0 12px; font-weight:900; letter-spacing:.3px}
     .lead{font-size: clamp(16px, 2.4vw, 20px); color:#e6f2ef; opacity:.9}
     .hero-cta{display:flex; gap:12px; margin-top:24px}
     .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:var(--glass); color:var(--white); font-weight:700}
     .btn.primary{background:linear-gradient(180deg, var(--white), #d6e8e4); color:var(--black)}
+
     .card-row{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin-top:28px}
     .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding:16px}
-    .card h4, .card h3{margin:6px 0}
+    .card h4{margin:6px 0 6px; font-size:18px}
     .meta{opacity:.8; font-size:14px}
-    @media (max-width: 980px){.hero .container{grid-template-columns: 1fr}.card-row{grid-template-columns: 1fr 1fr}}
-    @media (max-width: 640px){.card-row{grid-template-columns: 1fr}}
+
+    @media (max-width: 980px){
+      .hero .container{grid-template-columns: 1fr}
+      .card-row{grid-template-columns: 1fr 1fr}
+    }
+    @media (max-width: 640px){
+      .card-row{grid-template-columns: 1fr}
+    }
+
+    /* Sections */
     section{padding:64px 0; border-top:1px solid rgba(255,255,255,.06)}
     .section-head{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:14px; margin-bottom:24px}
     .section-head h2{margin:0; font-size: clamp(24px, 4vw, 36px)}
     .section-head p{margin:0; opacity:.85}
-    .schedule{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
-    .game{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding:16px; display:grid; gap:10px}
-    .badge.small{font-size:12px; padding:4px 8px}
-    .news{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px}
-    .post{display:grid; gap:10px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius: var(--radius); overflow:hidden}
-    .post img{aspect-ratio: 16/9; object-fit:cover}
-    .post .p{padding:14px}
-    .chip{display:inline-flex; padding:4px 8px; border:1px solid rgba(255,255,255,.2); border-radius:999px; font-size:12px; opacity:.9}
-    @media (max-width: 980px){.news{grid-template-columns: 1fr 1fr}}
-    @media (max-width: 640px){.news{grid-template-columns: 1fr}}
-    .teams{display:grid; grid-template-columns: repeat(4, 1fr); gap:14px}
-    .team{padding:16px; border-radius: var(--radius); border:1px solid rgba(255,255,255,.08); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02))}
-    @media (max-width: 980px){.teams{grid-template-columns: 1fr 1fr}}
-    @media (max-width: 640px){.teams{grid-template-columns: 1fr}}
-    .gallery{display:grid; grid-template-columns: repeat(6, 1fr); gap:6px}
-    .gallery img{border-radius:12px; aspect-ratio: 1; object-fit:cover; filter:saturate(105%)}
-    @media (max-width: 980px){.gallery{grid-template-columns: repeat(4, 1fr)}}
-    @media (max-width: 640px){.gallery{grid-template-columns: repeat(3, 1fr)}}
-    .cta-bar{display:grid; grid-template-columns: 1.5fr 1fr; gap:16px; align-items:center; background: linear-gradient(180deg, #012b25, #001b17); border:1px solid rgba(255,255,255,.08); padding:16px; border-radius: var(--radius)}
-    .cta-bar .btn{justify-content:center}
-    @media (max-width: 800px){.cta-bar{grid-template-columns: 1fr}}
-    footer{padding:40px 0; background:#001713; border-top:1px solid rgba(255,255,255,.06)}
-    .fgrid{display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:18px}
-    @media (max-width: 980px){.fgrid{grid-template-columns: 1fr 1fr}} 
-    @media (max-width: 640px){.fgrid{grid-template-columns: 1fr}}
+
+    /* Calendar */
     .calendar-container {background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding:20px; margin-bottom:20px;}
     .calendar-header {display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;}
     .calendar-nav {display:flex; gap:10px;}
@@ -88,256 +88,225 @@
     .calendar-today {background:rgba(0, 34, 29, 0.5); border:1px solid rgba(255,255,255,.2);}
     .training-event {background:#064a3f;}
     .match-event {background:#8a2b2b;}
+
+    /* Footer */
+    footer{padding:40px 0; background:#001713; border-top:1px solid rgba(255,255,255,.06)}
+    .fgrid{display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:18px}
+    .fgrid h5{margin:0 0 10px 0}
+    .copyright{opacity:.6; font-size:14px; margin-top:20px}
+    @media (max-width: 980px){.fgrid{grid-template-columns: 1fr 1fr}} 
+    @media (max-width: 640px){.fgrid{grid-template-columns: 1fr}}
+
+    /* Utilities */
+    .muted{color:#d7efe9; opacity:.9}
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="container nav">
-      <a class="brand" href="#home"><span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 14c3 1 6-1 8-3 3-2 7-4 10-3-1 4-4 7-7 9-4 3-8 4-11 2Z" fill="currentColor"/></svg></span>HBC ŠELMY LIBEREC</a>
+      <a class="brand" href="#home">
+        <span class="logo">H</span> HBC ŠELMY LIBEREC
+      </a>
       <nav>
         <ul>
           <li><a href="#novinky">Novinky</a></li>
           <li><a href="#tym">Týmy</a></li>
           <li><a href="#kalendar">Kalendář</a></li>
           <li><a href="#galerie">Galerie</a></li>
+          <li><a href="#permanentky">Permanentky</a></li>
           <li><a href="#obchod">Fanshop</a></li>
           <li><a href="#kontakt" class="cta">Kontakt</a></li>
         </ul>
       </nav>
-      <button class="burger" aria-label="Menu" onclick="toggleMenu()">☰</button>
+      <button class="burger" onclick="toggleMenu()">☰</button>
     </div>
   </header>
 
-  <aside id="drawer" class="drawer" aria-hidden="true">
+  <aside id="drawer" class="drawer">
     <a href="#novinky" onclick="toggleMenu(false)">Novinky</a>
     <a href="#tym" onclick="toggleMenu(false)">Týmy</a>
     <a href="#kalendar" onclick="toggleMenu(false)">Kalendář</a>
     <a href="#galerie" onclick="toggleMenu(false)">Galerie</a>
+    <a href="#permanentky" onclick="toggleMenu(false)">Permanentky</a>
     <a href="#obchod" onclick="toggleMenu(false)">Fanshop</a>
     <a href="#kontakt" onclick="toggleMenu(false)">Kontakt</a>
   </aside>
 
-  <main id="home" class="hero">
-    <div class="bg"></div>
-    <div class="container">
+<!-- Hero sekce -->
+<section class="hero" id="home">
+  <div class="bg"></div>
+  <div class="container">
+    <div>
+      <span class="badge">Oficiální klub</span>
+      <h1 class="headline">HBC ŠELMY LIBEREC</h1>
+      <p class="lead">Inline / Ball Hockey klub z Liberce – aktuality, týmy, zápasy a galerie.</p>
+      <div class="hero-cta">
+        <a href="#permanentky" class="btn primary">Koupit permanentku</a>
+        <a href="#kontakt" class="btn">Kontaktovat nás</a>
+      </div>
+    </div>
+    <img src="https://via.placeholder.com/600x400" alt="HBC ŠELMY LIBEREC" style="border-radius:20px; width:100%; max-width:600px;"/>
+  </div>
+</section>
+
+<!-- Novinky -->
+<section id="novinky">
+  <div class="container">
+    <div class="section-head">
+      <h2>Novinky</h2>
+      <p>Aktuální dění a zápasy našeho klubu</p>
+    </div>
+    <div class="news">
+      <div class="post">
+        <img src="https://via.placeholder.com/400x200" alt="Novinka 1"/>
+        <div class="p">
+          <span class="chip">Zápas</span>
+          <h4>Výhra na domácím hřišti</h4>
+          <p class="muted">18.8.2025</p>
+        </div>
+      </div>
+      <div class="post">
+        <img src="https://via.placeholder.com/400x200" alt="Novinka 2"/>
+        <div class="p">
+          <span class="chip">Trénink</span>
+          <h4>Nové tréninkové metody</h4>
+          <p class="muted">16.8.2025</p>
+        </div>
+      </div>
+      <div class="post">
+        <img src="https://via.placeholder.com/400x200" alt="Novinka 3"/>
+        <div class="p">
+          <span class="chip">Turnaj</span>
+          <h4>Účast na mezinárodním turnaji</h4>
+          <p class="muted">14.8.2025</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Týmy -->
+<section id="tym">
+  <div class="container">
+    <div class="section-head">
+      <h2>Naše týmy</h2>
+      <p>Seznam hráčů a rozdělení do kategorií</p>
+    </div>
+    <div class="teams">
+      <div class="team"><h4>A tým</h4><p class="muted">Hlavní soutěžní tým</p></div>
+      <div class="team"><h4>B tým</h4><p class="muted">Rezerva a juniorský tým</p></div>
+      <div class="team"><h4>Junioři</h4><p class="muted">Mladší hráči</p></div>
+      <div class="team"><h4>Ženy</h4><p class="muted">Dámský tým</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Kalendář -->
+<section id="kalendar">
+  <div class="container">
+    <div class="section-head">
+      <h2>Kalendář zápasů a tréninků</h2>
+      <p>Přehled nadcházejících událostí</p>
+    </div>
+    <div class="calendar-container">
+      <div class="calendar-header">
+        <h3>Srpen 2025</h3>
+        <div class="calendar-nav">
+          <button class="calendar-nav-btn">&lt;</button>
+          <button class="calendar-nav-btn">&gt;</button>
+        </div>
+      </div>
+      <div class="calendar-grid">
+        <div class="calendar-day-header">Po</div>
+        <div class="calendar-day-header">Út</div>
+        <div class="calendar-day-header">St</div>
+        <div class="calendar-day-header">Čt</div>
+        <div class="calendar-day-header">Pá</div>
+        <div class="calendar-day-header">So</div>
+        <div class="calendar-day-header">Ne</div>
+
+        <!-- Příklad dnů -->
+        <div class="calendar-day calendar-empty"></div>
+        <div class="calendar-day calendar-empty"></div>
+        <div class="calendar-day calendar-today">1<div class="calendar-event training-event">Trénink</div></div>
+        <div class="calendar-day">2</div>
+        <div class="calendar-day">3<div class="calendar-event match-event">Zápas</div></div>
+        <div class="calendar-day">4</div>
+        <div class="calendar-day">5</div>
+        <!-- ... další dny podle potřeby -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Galerie -->
+<section id="galerie">
+  <div class="container">
+    <div class="section-head">
+      <h2>Galerie</h2>
+      <p>Fotky z tréninků a zápasů</p>
+    </div>
+    <div class="gallery">
+      <img src="https://via.placeholder.com/200" alt="Galerie 1"/>
+      <img src="https://via.placeholder.com/200" alt="Galerie 2"/>
+      <img src="https://via.placeholder.com/200" alt="Galerie 3"/>
+      <img src="https://via.placeholder.com/200" alt="Galerie 4"/>
+      <img src="https://via.placeholder.com/200" alt="Galerie 5"/>
+      <img src="https://via.placeholder.com/200" alt="Galerie 6"/>
+    </div>
+  </div>
+</section>
+
+<!-- Permanentky / CTA bar -->
+<section id="permanentky">
+  <div class="container">
+    <div class="cta-bar">
       <div>
-        <span class="badge">🏒 Oficiální web klubu</span>
-        <h1 class="headline">Šelmy, co kousnou. <br/>Hokejbal made in Liberec.</h1>
-        <p class="lead">Jsme komunitní klub z Liberce. Vedeme mládež, táhneme A‑tým a děláme show pro fanoušky. Přidej se na trénink nebo doraž na zápas!</p>
-        <div class="hero-cta">
-          <a class="btn primary" href="#kalendar">Kalendář akcí</a>
-          <a class="btn" href="#tym">Přidat se do týmu</a>
-        </div>
+        <h3>Koupit permanentku</h3>
+        <p>Zajistěte si místo na všech domácích zápasech a získejte slevy ve fanshopu.</p>
       </div>
-      <div aria-hidden="true">
-        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=1200&auto=format&fit=crop" alt="Hráč se zahalenou helmou při střele" style="border-radius: var(--radius); border:1px solid rgba(255,255,255,.08); box-shadow: var(--shadow);"/>
-      </div>
+      <a href="#obchod" class="btn primary">Koupit nyní</a>
     </div>
-  </main>
+  </div>
+</section>
 
-  <section id="novinky">
-    <div class="container">
-      <div class="section-head">
-        <h2>Novinky</h2>
-        <p class="muted">Aktuálně z dění klubu</p>
+<!-- Kontakt / Footer -->
+<footer id="kontakt">
+  <div class="container">
+    <div class="fgrid">
+      <div>
+        <h5>HBC ŠELMY LIBEREC</h5>
+        <p>Oficiální web inline/ball hockey klubu.</p>
       </div>
-      <div class="news">
-        <article class="post">
-          <img src="https://images.unsplash.com/photo-1511268021046-6fce9b1b36fc?q=80&w=1600&auto=format&fit=crop" alt="Zápas v plném tempu"/>
-          <div class="p">
-            <span class="chip">A‑tým</span>
-            <h3>Šelmy berou body na severu</h3>
-            <p class="muted">Brutální energie, výborný týmový výkon a čisté konto. Report a fotky uvnitř.</p>
-          </div>
-        </article>
-        <article class="post">
-          <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1600&auto=format&fit=crop" alt="Trénink juniorů"/>
-          <div class="p">
-            <span class="chip">Mládež</span>
-            <h3>Nábor do U9 a U11</h3>
-            <p class="muted">Hledáme nové dravce. První měsíc zdarma, zapůjčíme vybavení.</p>
-          </div>
-        </article>
-        <article class="post">
-          <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=1600&auto=format&fit=crop" alt="Fans zóna"/>
-          <div class="p">
-            <span class="chip">Komunita</span>
-            <h3>Letní fans den</h3>
-            <p class="muted">Gril, hudba, soutěže pro děti i dospěláky. Přijďte si užít Šelmy jinak.</p>
-          </div>
-        </article>
+      <div>
+        <h5>Kontakt</h5>
+        <p>Email: info@hbcselmy.cz</p>
+        <p>Tel: +420 123 456 789</p>
+      </div>
+      <div>
+        <h5>Sociální sítě</h5>
+        <p>Instagram / Facebook / Twitter</p>
+      </div>
+      <div>
+        <h5>Odkazy</h5>
+        <p><a href="#novinky">Novinky</a></p>
+        <p><a href="#tym">Týmy</a></p>
+        <p><a href="#galerie">Galerie</a></p>
       </div>
     </div>
-  </section>
-
-  <section id="tym">
-    <div class="container">
-      <div class="section-head">
-        <h2>Týmy</h2>
-        <p class="muted">Poznej naše borce a mládež</p>
-      </div>
-      <div class="teams">
-        <div class="team">
-          <h4>A‑tým</h4>
-          <p>Hráči od 18 let, hrají regionální soutěže.</p>
-        </div>
-        <div class="team">
-          <h4>B‑tým</h4>
-          <p>Rezerva A‑týmu, mix zkušených a mladých talentů.</p>
-        </div>
-        <div class="team">
-          <h4>U15</h4>
-          <p>Talentovaná mládež od 13 do 15 let, vedená trenéry.</p>
-        </div>
-        <div class="team">
-          <h4>U11</h4>
-          <p>Mladší hráči učící se základům, zábava a zápasy.</p>
-        </div>
-      </div>
+    <div class="copyright">
+      &copy; <span id="year"></span> HBC ŠELMY LIBEREC. Všechna práva vyhrazena.
     </div>
-  </section>
-
-  <section id="kalendar">
-    <div class="container">
-      <div class="section-head">
-        <h2>Kalendář akcí</h2>
-        <p class="muted">Tréninky a zápasy přímo v přehledném kalendáři</p>
-      </div>
-      <div class="calendar-container">
-        <div class="calendar-header">
-          <h3 id="calendar-month-year"></h3>
-          <div class="calendar-nav">
-            <button class="calendar-nav-btn" onclick="prevMonth()">◀</button>
-            <button class="calendar-nav-btn" onclick="nextMonth()">▶</button>
-          </div>
-        </div>
-        <div class="calendar-grid" id="calendar-grid">
-          <!-- JS doplní dny -->
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="galerie">
-    <div class="container">
-      <div class="section-head">
-        <h2>Galerie</h2>
-        <p class="muted">Momentky z akcí a zápasů</p>
-      </div>
-      <div class="gallery">
-        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop" alt="Hráči"/>
-        <img src="https://images.unsplash.com/photo-1562184647-f42e2be5ab64?q=80&w=800&auto=format&fit=crop" alt="Fanoušci"/>
-        <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?q=80&w=800&auto=format&fit=crop" alt="Gól"/>
-        <img src="https://images.unsplash.com/photo-1552246049-6598baf12c2b?q=80&w=800&auto=format&fit=crop" alt="Trénink"/>
-        <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?q=80&w=800&auto=format&fit=crop" alt="Zápas"/>
-        <img src="https://images.unsplash.com/photo-1549940662-38f20ed53d7d?q=80&w=800&auto=format&fit=crop" alt="Fanoušci"/>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <div class="fgrid">
-        <div>
-          <h4>HBC ŠELMY LIBEREC</h4>
-          <p>Oficiální web klubu. Sleduj novinky, zápasy a galerii.</p>
-        </div>
-        <div>
-          <h4>Odkazy</h4>
-          <ul style="list-style:none; padding:0; margin:0;">
-            <li><a href="#novinky">Novinky</a></li>
-            <li><a href="#tym">Týmy</a></li>
-            <li><a href="#kalendar">Kalendář</a></li>
-            <li><a href="#galerie">Galerie</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Kontakt</h4>
-          <p>Email: info@hbcselmy.cz</p>
-          <p>Tel: +420 123 456 789</p>
-        </div>
-        <div>
-          <h4>Sleduj nás</h4>
-          <p><a href="#">Instagram</a></p>
-          <p><a href="#">Facebook</a></p>
-        </div>
-      </div>
-    </div>
-  </footer>
+  </div>
+</footer>
 
   <script>
-    const drawer = document.getElementById('drawer');
     function toggleMenu(force){
-      if(force===false) drawer.classList.remove('open');
-      else drawer.classList.toggle('open');
+      const d = document.getElementById('drawer');
+      const open = typeof force === 'boolean' ? force : !d.classList.contains('open');
+      d.classList.toggle('open', open);
     }
-
-    // Kalender
-    const events = [
-      { date: '2025-09-02', type: 'training', team: 'A-tým', time: '18:30' },
-      { date: '2025-09-02', type: 'training', team: 'B-tým', time: '20:00' },
-      { date: '2025-09-14', type: 'match', teams: 'ŠELMY vs DRACI', time: '14:00', place: 'Ruprechtice', home: true },
-      { date: '2025-09-22', type: 'match', teams: 'VLCI vs ŠELMY', time: '17:30', place: 'Jablonec', home: false },
-    ];
-
-    let currentMonth = new Date().getMonth();
-    let currentYear = new Date().getFullYear();
-
-    const monthNames = ["Leden","Únor","Březen","Duben","Květen","Červen","Červenec","Srpen","Září","Říjen","Listopad","Prosinec"];
-    const dayNames = ["Po","Út","St","Čt","Pá","So","Ne"];
-
-    function renderCalendar(){
-      const grid = document.getElementById('calendar-grid');
-      grid.innerHTML = '';
-      document.getElementById('calendar-month-year').textContent = monthNames[currentMonth] + " " + currentYear;
-
-      // Headers
-      dayNames.forEach(dn=>{
-        const dh = document.createElement('div');
-        dh.className='calendar-day-header';
-        dh.textContent=dn;
-        grid.appendChild(dh);
-      });
-
-      const firstDay = new Date(currentYear, currentMonth, 1).getDay(); // neděle=0
-      const startOffset = (firstDay===0?6:firstDay-1);
-
-      for(let i=0;i<startOffset;i++){
-        const empty = document.createElement('div');
-        empty.className='calendar-day calendar-empty';
-        grid.appendChild(empty);
-      }
-
-      const daysInMonth = new Date(currentYear, currentMonth+1,0).getDate();
-      for(let d=1; d<=daysInMonth; d++){
-        const dayDiv = document.createElement('div');
-        dayDiv.className='calendar-day';
-        dayDiv.dataset.day = d;
-        dayDiv.textContent = d;
-
-        const today = new Date();
-        if(today.getDate()===d && today.getMonth()===currentMonth && today.getFullYear()===currentYear){
-          dayDiv.classList.add('calendar-today');
-        }
-
-        events.forEach(ev=>{
-          const evDate = new Date(ev.date);
-          if(evDate.getDate()===d && evDate.getMonth()===currentMonth && evDate.getFullYear()===currentYear){
-            const eventDiv = document.createElement('div');
-            eventDiv.className = ev.type==='training'?'calendar-event training-event':'calendar-event match-event';
-            eventDiv.textContent = ev.type==='training'?`${ev.team} trénink ${ev.time}`:`${ev.teams} ${ev.time}`;
-            dayDiv.appendChild(eventDiv);
-          }
-        });
-
-        grid.appendChild(dayDiv);
-      }
-    }
-
-    function prevMonth(){currentMonth--; if(currentMonth<0){currentMonth=11; currentYear--;} renderCalendar();}
-    function nextMonth(){currentMonth++; if(currentMonth>11){currentMonth=0; currentYear++;} renderCalendar();}
-
-    renderCalendar();
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
