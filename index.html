@@ -177,12 +177,19 @@
     </div>
   </section>
 
-  <section id="kalendar">
+    <section id="kalendar">
     <div class="container">
       <div class="section-head">
         <h2>Kalendář akcí</h2>
         <p class="muted">Tréninky a zápasy přímo v přehledném kalendáři</p>
       </div>
+
+      <div class="card" style="margin-bottom:24px;">
+        <h3>Jak často budeš chodit na tréninky?</h3>
+        <p>Tréninky probíhají <strong>každé pondělí a čtvrtek</strong> od <strong>18:00 do 19:30</strong>.<br>
+        <em>(Duben – Říjen = venku)</em></p>
+      </div>
+
       <div class="calendar-container">
         <div class="calendar-header">
           <h3 id="calendar-month-year"></h3>
@@ -191,10 +198,10 @@
             <button class="calendar-nav-btn" onclick="nextMonth()">▶</button>
           </div>
         </div>
-        <div class="calendar-grid" id="calendar-grid">
-          <!-- JS doplní dny -->
-        </div>
+        <div class="calendar-grid" id="calendar-grid"></div>
       </div>
+
+      <p style="margin-top:12px; color:#9ed3c7; font-style:italic;">Tréninky jsou venku od dubna do října.</p>
     </div>
   </section>
 
@@ -323,14 +330,28 @@
       else drawer.classList.toggle('open');
     }
 
-    // Kalender
-    const events = [
-      { date: '2025-09-02', type: 'training', team: 'A-tým', time: '18:30' },
-      { date: '2025-09-02', type: 'training', team: 'B-tým', time: '20:00' },
-      { date: '2025-09-14', type: 'match', teams: 'ŠELMY vs DRACI', time: '14:00', place: 'Ruprechtice', home: true },
-      { date: '2025-09-22', type: 'match', teams: 'VLCI vs ŠELMY', time: '17:30', place: 'Jablonec', home: false },
-    ];
+    // Automaticky generované tréninky Po + Čt 18:00–19:30 (duben–říjen)
+    const events = [];
 
+    for(let month=3; month<=9; month++){ // duben (3) až říjen (9)
+      const year = 2025;
+      const daysInMonth = new Date(year, month+1, 0).getDate();
+      for(let day=1; day<=daysInMonth; day++){
+        const d = new Date(year, month, day);
+        const weekday = d.getDay(); // 0=Ne,1=Po,2=Út,...
+        if(weekday === 1 || weekday === 4){ // pondělí nebo čtvrtek
+          events.push({
+            date: `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`,
+            type: 'training',
+            team: 'Šelmy',
+            time: '18:00–19:30',
+            place: 'venku'
+          });
+        }
+      }
+    }
+
+    // Kalendářový engine
     let currentMonth = new Date().getMonth();
     let currentYear = new Date().getFullYear();
 
@@ -342,6 +363,7 @@
       grid.innerHTML = '';
       document.getElementById('calendar-month-year').textContent = monthNames[currentMonth] + " " + currentYear;
 
+      // Hlavička dnů
       dayNames.forEach(dn=>{
         const dh = document.createElement('div');
         dh.className='calendar-day-header';
@@ -374,8 +396,8 @@
           const evDate = new Date(ev.date);
           if(evDate.getDate()===d && evDate.getMonth()===currentMonth && evDate.getFullYear()===currentYear){
             const eventDiv = document.createElement('div');
-            eventDiv.className = ev.type==='training'?'calendar-event training-event':'calendar-event match-event';
-            eventDiv.textContent = ev.type==='training'?`${ev.team} trénink ${ev.time}`:`${ev.teams} ${ev.time}`;
+            eventDiv.className = 'calendar-event training-event';
+            eventDiv.textContent = `Trénink ${ev.time}`;
             dayDiv.appendChild(eventDiv);
           }
         });
@@ -389,6 +411,8 @@
 
     renderCalendar();
   </script>
+
+
 </body>
 </html>
 </body>
